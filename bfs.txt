@@ -1,0 +1,37 @@
+from collections import deque
+def bfs(graph, start, goal):
+    queue = deque([(start, [start])])  # Queue with tuple of (node, path)
+    visited = set()
+
+    while queue:
+        current, path = queue.popleft()
+        visited.add(current)
+        print(f"Visited node: {current}")  # Step: Mark node as visited
+
+        if current == goal:
+            print("Goal node reached!")
+            print("Traversal path:", " -> ".join(path))
+            return path  # Goal reached, return the path
+
+
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                queue.append((neighbor, path + [neighbor]))
+                visited.add(neighbor)  # Mark neighbor as visited when added to the queue
+
+    print("Goal node not reachable!")
+    return None  # No path found
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F', 'G'],
+    'D': ['B'],
+    'E': ['B'],
+    'F': ['C'],
+    'G': ['C']
+}
+# Starting BFS from 'A' to reach 'G'
+start_node = 'A'
+goal_node = 'G'
+print(f"BFS traversal and path from '{start_node}' to '{goal_node}':")
+bfs(graph, start_node, goal_node)

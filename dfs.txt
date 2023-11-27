@@ -1,0 +1,36 @@
+def dfs_state_space(graph, start, goal):
+    stack = [start]
+    visited = set()
+
+    while stack:
+        current = stack.pop()
+        visited.add(current)
+        print(f"Visited state: {current}")  # Step: Mark state as visited
+
+        if current == goal:
+            print("Goal state reached!")
+            return True
+
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                stack.append(neighbor)
+
+    print("Goal state not reachable!")
+    return False
+
+# Starting DFS from 'A' to reach 'G' state
+start_state = 'A'
+goal_state = 'G'
+
+# Simple graph representing a state space
+state_graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': ['G'],
+    'F': [],
+    'G': []
+}
+print(f"Searching path from '{start_state}' to '{goal_state}' using DFS with a stack:")
+dfs_state_space(state_graph, start_state, goal_state)
