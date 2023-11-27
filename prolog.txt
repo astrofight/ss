@@ -1,0 +1,14 @@
+find_max(X, Y, X) :- X >= Y, !.
+find_max(X, Y, Y) :- X < Y.
+
+find_min(X, Y, X) :- X =< Y, !.
+find_min(X, Y, Y) :- X > Y.
+
+
+-find_max(100,200,Max).
+
+
+series(R1,R2,Re) :- Re is R1 + R2.
+parallel(R1,R2,Re) :- Re is ((R1 * R2) / (R1 + R2)).
+
+-parallel(10,40,R3).
